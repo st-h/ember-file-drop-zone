@@ -29,20 +29,12 @@ Usage
 
 Ember file drop-zone provides both a mixin to add to existing components and a simple component that can be used in block form.
 
-See the source code of the [demo app](test/dummy/) for actual usage examples
+See the source code of the [demo app](tests/dummy/app/) for more complex examples
 
 ### Component
 ```
-{{#file-drop-zone onDrop=(action "addFiles") disabled=dropZoneDisabled dragging=dragging}}
-  {{#if dropZoneDisabled}}
-    dropping files is currently disabled...
-  {{else}}
-    {{#if dragging}}
-      and let it all go...
-    {{else}}
-      just drop your files here...
-    {{/if}}
-  {{/if}}
+{{#file-drop-zone onDrop=(action "addFiles")}}
+  just drop your files here...
 {{/file-drop-zone}}
 ```
 
@@ -83,7 +75,7 @@ This addon does not provide any predefined styles. However, it applies appropria
 |disabled|Applied when the dropzone is disabled|
 |dragging|Applied when one or more files are current being dragged over the dropzone|
 
-Please see [app.css](test/dummy/styles/app.css) for a styling example:
+Please see [app.css](tests/dummy/app/styles/app.css) for a styling example:
 
 ```
 .ember-file-drop-zone {
