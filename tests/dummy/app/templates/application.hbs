@@ -3,7 +3,7 @@
 <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly dropZoneDisabled}} onchange={{action (mut dropZoneDisabled) value="target.checked"}}>
 <label for="dropzone-active-checkbox">dropzone disabled</label>
 
-{{#file-drop-zone onDrop=(action "addFiles") disabled=dropZoneDisabled dragging=this._dragging as |dragging|}}
+{{#file-drop-zone onDrop=(action "addFiles") disabled=dropZoneDisabled as |dragging|}}
   {{#if dropZoneDisabled}}
     dropping files is currently disabled...
   {{else}}
