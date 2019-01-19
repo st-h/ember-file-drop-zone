@@ -33,6 +33,18 @@ module('Integration | Component | file-drop-zone', function(hooks) {
     return dropEvent;
   }
 
+  const createDragEnterEvent = function() {
+    const event = document.createEvent("CustomEvent");
+    event.initCustomEvent('dragenter', true, true, null);
+    return event;
+  }
+
+  const createDragLeaveEvent = function() {
+    const event = document.createEvent("CustomEvent");
+    event.initCustomEvent('dragleave', true, true, null);
+    return event;
+  }
+
   test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
@@ -51,7 +63,7 @@ module('Integration | Component | file-drop-zone', function(hooks) {
     assert.equal(this.element.textContent.trim(), 'template block text');
   });
 
-  test('correct file name is reported via DataTransferItemList', async function(assert) {
+  test('correct file is reported via DataTransferItemList', async function(assert) {
     assert.expect(2);
 
     this.set('onDrop', function(files) {
@@ -64,7 +76,7 @@ module('Integration | Component | file-drop-zone', function(hooks) {
     await editable.dispatchEvent(createDropEvent()); // paste mock event
   });
 
-  test('correct file name is reported via DataTransfer interface', async function(assert) {
+  test('correct file is reported via DataTransfer interface', async function(assert) {
     assert.expect(2);
 
     this.set('onDrop', function(files) {
@@ -75,5 +87,29 @@ module('Integration | Component | file-drop-zone', function(hooks) {
 
     const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
     await editable.dispatchEvent(createDropEvent(true)); // paste mock event
+  });
+
+  test('dragging files over dropzone should trigger action and set dragging', async function(assert) {
+    assert.expect(1);
+
+    this.set('onDragEnter', function() {
+      assert.ok(this.dragging);
+    })
+    await render(hbs`{{file-drop-zone onDragEnter=onDragEnter dragging=dragging}}`);
+
+    const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
+    await editable.dispatchEvent(createDragEnterEvent()); // paste mock event
+  });
+
+  test('when files leave dropzone should trigger action and set dragging correctly', async function(assert) {
+    assert.expect(1);
+
+    this.set('onDragLeave', function() {
+      assert.notOk(this.dragging);
+    })
+    await render(hbs`{{file-drop-zone onDragLeave=onDragLeave dragging=dragging}}`);
+
+    const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
+    await editable.dispatchEvent(createDragLeaveEvent()); // paste mock event
   });
 });
