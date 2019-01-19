@@ -1,0 +1,1 @@
+.ember-file-drop-zone{height:10vh;width:50vw;background:rgba(22,170,113,.19);display:flex;align-items:center;justify-content:center;transition:all 1s ease-in-out}.ember-file-drop-zone.disabled{color:gray;background:#d3d3d3}.ember-file-drop-zone.dragging:not(.disabled){background:#a9b9af;color:#fff}
