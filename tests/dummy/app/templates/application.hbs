@@ -1,3 +1,25 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">ember-file-drop-zone</h2>
+
+<input type="checkbox" id="dropzone-active-checkbox" checked={{readonly dropZoneDisabled}} onchange={{action (mut dropZoneDisabled) value="target.checked"}}>
+<label for="dropzone-active-checkbox">dropzone disabled</label>
+
+{{#file-drop-zone onDrop=(action "addFiles") disabled=dropZoneDisabled dragging=dragging}}
+  {{#if dropZoneDisabled}}
+    dropping files is currently disabled...
+  {{else}}
+    {{#if dragging}}
+      and let it all go...
+    {{else}}
+      just drop your files here...
+    {{/if}}
+  {{/if}}
+{{/file-drop-zone}}
+
+<h3>file drop history</h3>
+<ul>
+  {{#each files as |file|}}
+    <li>{{file.name}} - {{file.size}} bytes</li>
+  {{/each}}
+</ul>
 
 {{outlet}}
