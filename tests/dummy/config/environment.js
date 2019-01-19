@@ -46,6 +46,8 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.locationType = 'hash';
     ENV.rootURL = '/ember-file-drop-zone/';
+    ENV.locationType = 'hash';
+    ENV.rootURL = '/ember-file-drop-zone/';
     // here you can enable a production-specific feature
   }
 
