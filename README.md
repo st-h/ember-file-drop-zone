@@ -1,5 +1,12 @@
 ember-file-drop-zone
 ==============================================================================
+[![Greenkeeper badge](https://badges.greenkeeper.io/st-h/ember-file-drop-zone.svg)](https://greenkeeper.io/)
+[![Latest NPM release][npm-badge]][npm-badge-url]
+[![TravisCI Build Status][travis-badge]][travis-badge-url]
+[![Code Climate][codeclimate-badge]][codeclimate-badge-url]
+[![Ember Observer Score][ember-observer-badge]][ember-observer-badge-url]
+[![Dependencies][dependencies-badge]][dependencies-badge-url]
+[![Dev Dependencies][devDependencies-badge]][devDependencies-badge-url]
 
 easily add a dropzone to enable file drag and drop to your ember app
 
@@ -96,3 +103,16 @@ License
 ------------------------------------------------------------------------------
 
 This project is licensed under the [MIT License](LICENSE.md).
+
+[npm-badge]: https://img.shields.io/npm/v/ember-file-drop-zone.svg
+[npm-badge-url]: https://www.npmjs.com/package/ember-file-drop-zone
+[travis-badge]: https://img.shields.io/travis/st-h/ember-file-drop-zone/master.svg?label=TravisCI
+[travis-badge-url]: https://travis-ci.org/st-h/ember-file-drop-zone
+[codeclimate-badge]: https://api.codeclimate.com/v1/badges/7bb1e87f845bf2cf5cb8/maintainability
+[codeclimate-badge-url]: https://codeclimate.com/github/st-h/ember-file-drop-zone/maintainability
+[ember-observer-badge]: http://emberobserver.com/badges/ember-file-drop-zone.svg
+[ember-observer-badge-url]: http://emberobserver.com/addons/ember-file-drop-zone
+[dependencies-badge]: https://img.shields.io/david/st-h/ember-file-drop-zone.svg
+[dependencies-badge-url]: https://david-dm.org/st-h/ember-file-drop-zone
+[devDependencies-badge]: https://img.shields.io/david/dev/st-h/ember-file-drop-zone.svg
+[devDependencies-badge-url]: https://david-dm.org/st-h/ember-file-drop-zone#info=devDependencies
