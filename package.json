@@ -9,7 +9,7 @@
     "dropzone",
     "drag and drop"
   ],
-  "repository": "",
+  "repository": "https://github.com/st-h/ember-file-drop-zone",
   "license": "MIT",
   "author": "",
   "directories": {
