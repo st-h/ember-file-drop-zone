@@ -64,6 +64,7 @@ export default Component.extend(dropZone, {
 
 #### onDrop(files)
 called when files have been dropped
+
 **files** an EmberArray of js file objects that were dropped
 
 #### onDragEnter()
