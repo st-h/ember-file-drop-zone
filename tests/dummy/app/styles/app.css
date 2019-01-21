@@ -1,6 +1,16 @@
+h1 {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .ember-file-drop-zone {
   height: 10vh;
-  width: 50vw;
+  width: 40vw;
   background: rgba(22, 170, 113, 0.19);
   display: flex;
   align-items: center;
@@ -14,7 +24,11 @@
 }
 
 .ember-file-drop-zone.dragging:not(.disabled) {
-  background: #a9b9af;
+  background: #b9b0a9;
   color: white;
+}
+
+.ember-file-drop-zone.hovering:not(.disabled) {
+  background: #a9b9af;
 }
 

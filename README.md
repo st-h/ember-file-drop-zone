@@ -3,6 +3,7 @@ ember-file-drop-zone
 [![Greenkeeper badge](https://badges.greenkeeper.io/st-h/ember-file-drop-zone.svg)](https://greenkeeper.io/)
 [![Latest NPM release][npm-badge]][npm-badge-url]
 [![TravisCI Build Status][travis-badge]][travis-badge-url]
+[![Coverage Status](https://coveralls.io/repos/github/st-h/ember-file-drop-zone/badge.svg?branch=master)](https://coveralls.io/github/st-h/ember-file-drop-zone?branch=master)
 [![Code Climate][codeclimate-badge]][codeclimate-badge-url]
 [![Ember Observer Score][ember-observer-badge]][ember-observer-badge-url]
 [![Dependencies][dependencies-badge]][dependencies-badge-url]
@@ -48,9 +49,9 @@ See the source code of the [demo app](tests/dummy/app/) for more complex example
 ### Mixin
 ```
 import Component from '@ember/component';
-import dropZone from 'ember-file-drop-zone/mixins/file-drop-zone';
+import DropZone from 'ember-file-drop-zone/mixins/file-drop-zone';
 
-export default Component.extend(dropZone, {
+export default Component.extend(DropZone, {
 
 });
 ```
@@ -95,7 +96,11 @@ Please see [app.css](tests/dummy/app/styles/app.css) for a styling example:
 }
 
 .ember-file-drop-zone.dragging:not(.disabled) {
-  // styles when files are being dragged and dropzone is not disabled
+  // styles when files are being dragged over the window, but not over the dropzone and dropzone is not disabled
+}
+
+.ember-file-drop-zone.hovering {
+  // styles when files are being dragged over the dropzone (independent of the disabled state)
 }
 ```
 

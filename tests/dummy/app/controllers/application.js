@@ -15,6 +15,9 @@ export default Controller.extend({
       files.forEach((file) => {
         this.files.pushObject(file);
       })
+    },
+    countFiles(files) {
+      this.incrementProperty('fileCount', files.length);
     }
   }
 });

@@ -33,13 +33,43 @@ module('Integration | Component | file-drop-zone', function(hooks) {
     return dropEvent;
   }
 
-  const createDragEnterEvent = function() {
+  const createDragEnterEvent = function(dataTransferInterface) {
+    const event = document.createEvent("CustomEvent");
+    event.initCustomEvent('dragenter', true, true, null);
+    if (dataTransferInterface) {
+      event.dataTransfer = {
+        files: [
+           null
+        ]
+      }
+    } else {
+      event.dataTransfer = {
+        items: [
+          {
+            kind: 'file',
+            getAsFile() {
+              return null;
+            }
+          }
+        ]
+      }
+    }
+    return event;
+  }
+
+  const createDragLeaveEvent = function() {
+    const event = document.createEvent("CustomEvent");
+    event.initCustomEvent('dragleave', true, true, null);
+    return event;
+  }
+
+  const createWindowDragEnterEvent = function() {
     const event = document.createEvent("CustomEvent");
     event.initCustomEvent('dragenter', true, true, null);
     return event;
   }
 
-  const createDragLeaveEvent = function() {
+  const createWindowDragLeaveEvent = function() {
     const event = document.createEvent("CustomEvent");
     event.initCustomEvent('dragleave', true, true, null);
     return event;
@@ -89,25 +119,37 @@ module('Integration | Component | file-drop-zone', function(hooks) {
     await editable.dispatchEvent(createDropEvent(true)); // paste mock event
   });
 
-  test('dragging files over dropzone should trigger action and set dragging', async function(assert) {
+  test('dragging files into window should set dragging, window leave should reset', async function(assert) {
+    assert.expect(4);
+    await render(hbs`{{file-drop-zone dragging=dragging _windowEnteredCounter=counter}}`);
+    await window.dispatchEvent(createWindowDragEnterEvent()); // paste mock event
+    assert.ok(this.dragging);
+    assert.equal(this.counter, 1, 'window enter counter should be incremented');
+
+    await window.dispatchEvent(createWindowDragLeaveEvent()); // paste mock event
+    assert.notOk(this.dragging);
+    assert.equal(this.counter, 0, 'window enter counter should be reset');
+  });
+
+  test('dragging files over dropzone should trigger action and set hovering', async function(assert) {
     assert.expect(1);
 
     this.set('onDragEnter', function() {
-      assert.ok(this.dragging);
+      assert.ok(this.hovering);
     })
-    await render(hbs`{{file-drop-zone onDragEnter=onDragEnter dragging=dragging}}`);
+    await render(hbs`{{file-drop-zone onDragEnter=onDragEnter}}`);
 
     const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
     await editable.dispatchEvent(createDragEnterEvent()); // paste mock event
   });
 
-  test('when files leave dropzone should trigger action and set dragging correctly', async function(assert) {
+  test('when files leave dropzone should trigger action and set hovering correctly', async function(assert) {
     assert.expect(1);
 
     this.set('onDragLeave', function() {
-      assert.notOk(this.dragging);
+      assert.notOk(this.hovering);
     })
-    await render(hbs`{{file-drop-zone onDragLeave=onDragLeave dragging=dragging}}`);
+    await render(hbs`{{file-drop-zone onDragLeave=onDragLeave}}`);
 
     const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
     await editable.dispatchEvent(createDragLeaveEvent()); // paste mock event
