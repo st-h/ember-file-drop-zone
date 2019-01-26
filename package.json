@@ -1,6 +1,6 @@
 {
   "name": "ember-file-drop-zone",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "easily add a dropzone to enable file drag and drop to your ember app",
   "keywords": [
     "ember-addon",
