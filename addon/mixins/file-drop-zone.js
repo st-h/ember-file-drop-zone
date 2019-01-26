@@ -86,8 +86,9 @@ export default Mixin.create({
       // Use DataTransferItemList interface to access the file(s)
       for (var i = 0; i < event.dataTransfer.items.length; i++) {
         // If dropped items aren't files, reject them
-        if (event.dataTransfer.items[i].kind === 'file') {
-          files.push(event.dataTransfer.items[i].getAsFile());
+        const item = event.dataTransfer.items[i];
+        if (item.kind === 'file') {
+          files.push(item.getAsFile());
         }
       }
     } else {
