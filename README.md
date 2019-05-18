@@ -17,6 +17,7 @@ Compatibility
 
 * Ember.js v2.18 or above
 * Ember CLI v2.13 or above
+* Node.js v8 or above
 
 
 Installation
@@ -103,6 +104,12 @@ Please see [app.css](tests/dummy/app/styles/app.css) for a styling example:
   // styles when files are being dragged over the dropzone (independent of the disabled state)
 }
 ```
+
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
 License
