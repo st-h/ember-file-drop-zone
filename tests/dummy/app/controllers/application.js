@@ -4,7 +4,6 @@ import { tracked } from '@glimmer/tracking';
 import { A } from '@ember/array';
 
 export default class ApplicationController extends Controller {
-
   @tracked dropZoneDisabled = false;
   @tracked files = A();
   @tracked fileCount = 0;
