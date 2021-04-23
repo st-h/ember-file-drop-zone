@@ -2,8 +2,8 @@
 
 <main>
   <section>
-    {{#file-drop-zone onDrop=(action "addFiles") disabled=dropZoneDisabled as |state|}}
-      {{#if dropZoneDisabled}}
+    <FileDropZone @onDrop={{this.addFiles}} @disabled={{this.dropZoneDisabled}} as |state|>
+      {{#if this.dropZoneDisabled}}
         dropping files is currently disabled...
       {{else}}
         {{#if state.hovering}}
@@ -14,21 +14,22 @@
           just drop your files here...
         {{/if}}
       {{/if}}
-    {{/file-drop-zone}}
+    </FileDropZone>
 
-    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly dropZoneDisabled}} onchange={{action (mut dropZoneDisabled) value="target.checked"}}>
+    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly this.dropZoneDisabled}} onchange={{action (mut this.dropZoneDisabled) value="target.checked"}}>
     <label for="dropzone-active-checkbox">dropzone disabled</label>
 
     <h3>file drop history</h3>
     <ul>
-      {{#each files as |file|}}
+      {{#each this.files as |file|}}
         <li>{{file.name}} - {{file.size}} bytes</li>
       {{/each}}
     </ul>
   </section>
 
   <section>
-    {{#file-drop-zone onDrop=(action "countFiles") as |state|}}
+    <FileDropZone @onDrop={{this.countFiles}} as |state|>
+
       {{#if state.hovering}}
         now let it all go...
       {{else if state.dragging}}
@@ -36,9 +37,9 @@
       {{else}}
         or drop them here to count them...
       {{/if}}
-    {{/file-drop-zone}}
+    </FileDropZone>
 
-    <div>files counted: {{fileCount}}</div>
+    <div>files counted: {{this.fileCount}}</div>
   </section>
 </main>
 {{outlet}}
