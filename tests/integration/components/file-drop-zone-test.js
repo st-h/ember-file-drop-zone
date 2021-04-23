@@ -59,17 +59,17 @@ module('Integration | Component | file-drop-zone', function (hooks) {
     return event;
   };
 
-  const createWindowDragEnterEvent = function () {
-    const event = document.createEvent('CustomEvent');
-    event.initCustomEvent('dragenter', true, true, null);
-    return event;
-  };
+  // const createWindowDragEnterEvent = function () {
+  //   const event = document.createEvent('CustomEvent');
+  //   event.initCustomEvent('dragenter', true, true, null);
+  //   return event;
+  // };
 
-  const createWindowDragLeaveEvent = function () {
-    const event = document.createEvent('CustomEvent');
-    event.initCustomEvent('dragleave', true, true, null);
-    return event;
-  };
+  // const createWindowDragLeaveEvent = function () {
+  //   const event = document.createEvent('CustomEvent');
+  //   event.initCustomEvent('dragleave', true, true, null);
+  //   return event;
+  // };
 
   test('it renders', async function (assert) {
     // Set any properties with this.set('myProperty', 'value');
