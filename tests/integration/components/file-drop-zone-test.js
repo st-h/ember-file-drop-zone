@@ -100,7 +100,7 @@ module('Integration | Component | file-drop-zone', function(hooks) {
       assert.equal(files.length, 1);
       assert.equal('test-file', files[0].name, 'dropped file name matches parameter provided by action')
     })
-    await render(hbs`{{file-drop-zone onDrop=onDrop}}`);
+    await render(hbs`{{file-drop-zone onDrop=this.onDrop}}`);
 
     const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
     await editable.dispatchEvent(createDropEvent()); // paste mock event
@@ -113,23 +113,11 @@ module('Integration | Component | file-drop-zone', function(hooks) {
       assert.equal(files.length, 1);
       assert.equal('test-file-interface', files[0].name, 'dropped file name matches parameter provided by action')
     })
-    await render(hbs`{{file-drop-zone onDrop=onDrop}}`);
+    await render(hbs`{{file-drop-zone onDrop=this.onDrop}}`);
 
     const editable = this.element.getElementsByClassName('ember-file-drop-zone')[0];
     await editable.dispatchEvent(createDropEvent(true)); // paste mock event
   });
-
-  // test('dragging files into window should set dragging, window leave should reset', async function(assert) {
-  //   assert.expect(4);
-  //   await render(hbs`{{file-drop-zone dragging=this.dragging _windowEnteredCounter=counter}}`);
-  //   await window.dispatchEvent(createWindowDragEnterEvent()); // paste mock event
-  //   assert.ok(this.dragging);
-  //   assert.equal(this.counter, 1, 'window enter counter should be incremented');
-
-  //   await window.dispatchEvent(createWindowDragLeaveEvent()); // paste mock event
-  //   assert.notOk(this.dragging);
-  //   assert.equal(this.counter, 0, 'window enter counter should be reset');
-  // });
 
   test('dragging files over dropzone should trigger action and set hovering', async function(assert) {
     await render(hbs`

@@ -19,6 +19,8 @@ Compatibility
 * Ember CLI v2.13 or above
 * Node.js v10 or above
 
+Since version 1.0.0 this addon makes use of glimmer components only.
+
 
 Installation
 ------------------------------------------------------------------------------
@@ -36,25 +38,19 @@ check out the [demo page](https://st-h.github.io/ember-file-drop-zone/)
 Usage
 ------------------------------------------------------------------------------
 
-Ember file drop-zone provides both a mixin to add to existing components and a simple component that can be used in block form.
-
 See the source code of the [demo app](tests/dummy/app/) for more complex examples
 
 ### Component
 ```
-{{#file-drop-zone onDrop=(action "addFiles")}}
-  just drop your files here...
-{{/file-drop-zone}}
-```
-
-### Mixin
-```
-import Component from '@ember/component';
-import DropZone from 'ember-file-drop-zone/mixins/file-drop-zone';
-
-export default Component.extend(DropZone, {
-
-});
+<FileDropZone @onDrop={{this.addFiles}} @disabled={{this.dropZoneDisabled}} as |state|>
+  {#if state.hovering}}
+    hovering over the dropzone
+  {{else if state.dragging}}
+    dragging is active
+  {{else}}
+    drop your files here...
+  {{/if}}
+</FileDropZone>
 ```
 
 ### Parameters

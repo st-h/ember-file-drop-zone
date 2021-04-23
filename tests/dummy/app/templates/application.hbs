@@ -16,7 +16,7 @@
       {{/if}}
     </FileDropZone>
 
-    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly this.dropZoneDisabled}} onchange={{action (mut this.dropZoneDisabled) value="target.checked"}}>
+    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly this.dropZoneDisabled}} onchange={{fn (mut this.dropZoneDisabled) value="target.checked"}}>
     <label for="dropzone-active-checkbox">dropzone disabled</label>
 
     <h3>file drop history</h3>
