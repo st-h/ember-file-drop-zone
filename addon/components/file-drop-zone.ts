@@ -18,11 +18,11 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
  @action
   registerListener(element) {
     window.addEventListener('dragenter', this.onWindowDragEnter, false);
-    window.addEventListener('dragleave', this.onWindowDragLeave), false;
+    window.addEventListener('dragleave', this.onWindowDragLeave, false);
     window.addEventListener('dragover', this.onWindowDragOver, false);
     window.addEventListener('drop', this.onWindowDrop, false);
     element.addEventListener('dragenter', this.onDragEnter, false);
-    element.addEventListener('dragleave', this.onDragLeave), false;
+    element.addEventListener('dragleave', this.onDragLeave, false);
     element.addEventListener('dragover', this.onDragOver, false);
     element.addEventListener('drop', this.onDrop, false);
   }
@@ -34,7 +34,7 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
     window.removeEventListener('dragover', this.onWindowDragOver, false);
     window.removeEventListener('drop', this.onWindowDrop, false);
     element.removeEventListener('dragenter', this.onDragEnter, false);
-    element.removeEventListener('dragleave', this.onDragLeave), false;
+    element.removeEventListener('dragleave', this.onDragLeave, false);
     element.removeEventListener('dragover', this.onDragOver, false);
     element.removeEventListener('drop', this.onDrop, false);
   }
