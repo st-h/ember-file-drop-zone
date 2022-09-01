@@ -13,7 +13,8 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   @tracked hovering = false;
   @tracked dragging = false;
-  @tracked windowEnteredCounter = 0;
+  windowEnteredCounter = 0;
+  elementEnteredCounter = 0;
 
  @action
   registerListener(element) {
@@ -65,6 +66,7 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   @action
   onDragEnter(e: DragEvent) {
+    ++this.elementEnteredCounter;
     this.hovering = true;
     if (!this.args.disabled && this.args.onDragEnter) {
       this.args.onDragEnter(this.extractFiles(e).length);
@@ -73,9 +75,11 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   @action
   onDragLeave() {
-    this.hovering = false;
-    if (!this.args.disabled && this.args.onDragLeave) {
-      this.args.onDragLeave();
+    if (--this.elementEnteredCounter == 0) {
+      this.hovering = false;
+      if (!this.args.disabled && this.args.onDragLeave) {
+        this.args.onDragLeave();
+      }
     }
   }
 
@@ -101,6 +105,7 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
     this.dragging = false;
     this.hovering = false;
     this.windowEnteredCounter = 0;
+    this.elementEnteredCounter = 0;
   }
 
   extractFiles(event: DragEvent) {
