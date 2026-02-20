@@ -1,0 +1,62 @@
+{
+  "name": "ember-file-drop-zone",
+  "version": "3.0.0-rc.0",
+  "description": "easily add a dropzone to enable file drag and drop to your ember app",
+  "keywords": [
+    "ember-addon",
+    "file",
+    "drop",
+    "dropzone",
+    "drag and drop"
+  ],
+  "repository": "https://github.com/st-h/ember-file-drop-zone",
+  "license": "MIT",
+  "author": "st-h",
+  "scripts": {
+    "build": "rollup --config",
+    "prepack": "rollup --config",
+    "start": "rollup --config --watch"
+  },
+  "dependencies": {
+    "@ember/render-modifiers": "^3.0.0",
+    "@embroider/addon-shim": "^1.10.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/plugin-proposal-decorators": "^7.29.0",
+    "@babel/plugin-transform-class-properties": "^7.28.6",
+    "@babel/preset-typescript": "^7.28.5",
+    "@embroider/addon-dev": "^8.3.0",
+    "@rollup/plugin-babel": "^6.1.0",
+    "rollup": "^4.57.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@glimmer/component": "^1.0.4 || ^2.0.0",
+    "@glimmer/tracking": "^1.0.4 || ^2.0.0"
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "app-js": {
+      "./components/file-drop-zone.js": "./dist/_app_/components/file-drop-zone.js"
+    },
+    "main": "addon-main.cjs",
+    "type": "addon",
+    "version": 2
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "files": [
+    "addon-main.cjs",
+    "dist"
+  ]
+}

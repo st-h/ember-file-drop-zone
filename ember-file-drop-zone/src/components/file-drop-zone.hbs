@@ -1,0 +1,6 @@
+<div {{did-insert this.registerListener}}
+     {{will-destroy this.unregisterListener}}
+     class="ember-file-drop-zone {{if @disabled 'disabled'}} {{if this.dragging 'dragging'}} {{if this.hovering 'hovering'}}"
+     ...attributes>
+  {{yield (hash dragging=this.dragging hovering=this.hovering)}}
+</div>

@@ -1,0 +1,45 @@
+<h1 id="title">ember-file-drop-zone</h1>
+
+<main>
+  <section>
+    <FileDropZone @onDrop={{this.addFiles}} @disabled={{this.dropZoneDisabled}} as |state|>
+      {{#if this.dropZoneDisabled}}
+        dropping files is currently disabled...
+      {{else}}
+        {{#if state.hovering}}
+          now let it all go...
+        {{else if state.dragging}}
+          yes, yes... here it is...
+        {{else}}
+          just drop your files here...
+        {{/if}}
+      {{/if}}
+    </FileDropZone>
+
+    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly this.dropZoneDisabled}} onchange={{this.toggleEnabled}}>
+    <label for="dropzone-active-checkbox">dropzone disabled</label>
+
+    <h3>file drop history</h3>
+    <ul>
+      {{#each this.files as |file|}}
+        <li>{{file.name}} - {{file.size}} bytes</li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section>
+    <FileDropZone @onDrop={{this.countFiles}} as |state|>
+
+      {{#if state.hovering}}
+        now let it all go...
+      {{else if state.dragging}}
+        yes, yes... here it is...
+      {{else}}
+        or drop them here to count them...
+      {{/if}}
+    </FileDropZone>
+
+    <div>files counted: {{this.fileCount}}</div>
+  </section>
+</main>
+{{outlet}}

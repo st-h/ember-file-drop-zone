@@ -1,0 +1,3 @@
+packages:
+  - ember-file-drop-zone
+  - test-app
