@@ -43,7 +43,7 @@ See the source code of the [demo app](tests/dummy/app/) for more complex example
 ### Component
 ```
 <FileDropZone @onDrop={{this.addFiles}} @disabled={{this.dropZoneDisabled}} as |state|>
-  {#if state.hovering}}
+  {{#if state.hovering}}
     hovering over the dropzone
   {{else if state.dragging}}
     dragging is active
@@ -53,17 +53,34 @@ See the source code of the [demo app](tests/dummy/app/) for more complex example
 </FileDropZone>
 ```
 
+### Filtering by file type
+```
+<FileDropZone
+  @accept="image/*,.pdf"
+  @onDrop={{this.addFiles}}
+  @onDropRejected={{this.handleRejected}}
+as |state|>
+  drop images or PDFs here...
+</FileDropZone>
+```
+
 ### Parameters
 |Paramter|type|default|description
 |-|-|-|-|
 |**disabled**| boolean | false | when set to true, the dropzone is disabled and files can no longer be dropped|
+|**accept**| string | undefined | comma-separated list of accepted file types. Supports MIME types (`application/pdf`), extensions (`.pdf`), and wildcards (`image/*`). When set, only matching files are passed to `onDrop`; rejected files are passed to `onDropRejected`. When not set, all files are passed to `onDrop`.|
 
 ### Events
 
 #### onDrop(files)
-called when files have been dropped
+called when files have been dropped (or when only accepted files remain after filtering via `@accept`)
 
-**files** an EmberArray of js file objects that were dropped
+**files** an array of js file objects that were dropped
+
+#### onDropRejected(files)
+called when files have been dropped that do not match the `@accept` filter
+
+**files** an array of js file objects that were rejected
 
 #### onDragEnter()
 called when files are being dragged over the dropzone

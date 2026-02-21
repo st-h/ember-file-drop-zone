@@ -4,7 +4,9 @@ import { action } from '@ember/object';
 
 interface FileDropZoneComponentArgs {
   disabled: boolean;
+  accept?: string;
   onDrop?: (files: File[]) => void;
+  onDropRejected?: (files: File[]) => void;
   onDragEnter?: (count: number) => void;
   onDragLeave?: () => void;
 }
@@ -15,28 +17,20 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
   @tracked dragging = false;
   @tracked windowEnteredCounter = 0;
 
- @action
-  registerListener(element: HTMLElement) {
-    window.addEventListener('dragenter', this.onWindowDragEnter, false);
-    window.addEventListener('dragleave', this.onWindowDragLeave, false);
-    window.addEventListener('dragover', this.onWindowDragOver, false);
-    window.addEventListener('drop', this.onWindowDrop, false);
-    element.addEventListener('dragenter', this.onDragEnter, false);
-    element.addEventListener('dragleave', this.onDragLeave, false);
-    element.addEventListener('dragover', this.onDragOver, false);
-    element.addEventListener('drop', this.onDrop, false);
+  constructor(owner: unknown, args: FileDropZoneComponentArgs) {
+    super(owner, args);
+    window.addEventListener('dragenter', this.onWindowDragEnter);
+    window.addEventListener('dragleave', this.onWindowDragLeave);
+    window.addEventListener('dragover', this.onWindowDragOver);
+    window.addEventListener('drop', this.onWindowDrop);
   }
 
-  @action
-  unregisterListener(element: HTMLElement) {
-    window.removeEventListener('dragenter', this.onWindowDragEnter, false);
-    window.removeEventListener('dragleave', this.onWindowDragLeave, false);
-    window.removeEventListener('dragover', this.onWindowDragOver, false);
-    window.removeEventListener('drop', this.onWindowDrop, false);
-    element.removeEventListener('dragenter', this.onDragEnter, false);
-    element.removeEventListener('dragleave', this.onDragLeave, false);
-    element.removeEventListener('dragover', this.onDragOver, false);
-    element.removeEventListener('drop', this.onDrop, false);
+  willDestroy() {
+    super.willDestroy();
+    window.removeEventListener('dragenter', this.onWindowDragEnter);
+    window.removeEventListener('dragleave', this.onWindowDragLeave);
+    window.removeEventListener('dragover', this.onWindowDragOver);
+    window.removeEventListener('drop', this.onWindowDrop);
   }
 
   hasFiles(e: DragEvent): boolean {
@@ -104,9 +98,51 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
     if (this.args.disabled) {
       return true;
     }
-    if (this.args.onDrop) {
-      this.args.onDrop(this.extractFiles(e));
+
+    const files = this.extractFiles(e);
+    const { accepted, rejected } = this.filterFiles(files);
+
+    if (accepted.length > 0 && this.args.onDrop) {
+      this.args.onDrop(accepted);
     }
+    if (rejected.length > 0 && this.args.onDropRejected) {
+      this.args.onDropRejected(rejected);
+    }
+  }
+
+  filterFiles(files: File[]): { accepted: File[]; rejected: File[] } {
+    const accept = this.args.accept;
+    if (!accept) {
+      return { accepted: files, rejected: [] };
+    }
+
+    const tokens = accept.split(',').map((t) => t.trim().toLowerCase());
+    const accepted: File[] = [];
+    const rejected: File[] = [];
+
+    for (const file of files) {
+      const fileName = file.name.toLowerCase();
+      const fileType = file.type.toLowerCase();
+
+      const matches = tokens.some((token) => {
+        if (token.startsWith('.')) {
+          return fileName.endsWith(token);
+        }
+        if (token.endsWith('/*')) {
+          const prefix = token.slice(0, -1);
+          return fileType.startsWith(prefix);
+        }
+        return fileType === token;
+      });
+
+      if (matches) {
+        accepted.push(file);
+      } else {
+        rejected.push(file);
+      }
+    }
+
+    return { accepted, rejected };
   }
 
   reset() {

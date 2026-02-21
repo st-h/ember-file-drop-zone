@@ -2,7 +2,11 @@
 
 <main>
   <section>
-    <FileDropZone @onDrop={{this.addFiles}} @disabled={{this.dropZoneDisabled}} as |state|>
+    <FileDropZone
+      @onDrop={{this.addFiles}}
+      @disabled={{this.dropZoneDisabled}}
+      as |state|
+    >
       {{#if this.dropZoneDisabled}}
         dropping files is currently disabled...
       {{else}}
@@ -16,7 +20,12 @@
       {{/if}}
     </FileDropZone>
 
-    <input type="checkbox" id="dropzone-active-checkbox" checked={{readonly this.dropZoneDisabled}} onchange={{this.toggleEnabled}}>
+    <input
+      type="checkbox"
+      id="dropzone-active-checkbox"
+      checked={{readonly this.dropZoneDisabled}}
+      onchange={{this.toggleEnabled}}
+    />
     <label for="dropzone-active-checkbox">dropzone disabled</label>
 
     <h3>file drop history</h3>

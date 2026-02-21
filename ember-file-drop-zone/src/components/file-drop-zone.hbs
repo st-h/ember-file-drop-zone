@@ -1,5 +1,7 @@
-<div {{did-insert this.registerListener}}
-     {{will-destroy this.unregisterListener}}
+<div {{on "dragenter" this.onDragEnter}}
+     {{on "dragleave" this.onDragLeave}}
+     {{on "dragover" this.onDragOver}}
+     {{on "drop" this.onDrop}}
      class="ember-file-drop-zone {{if @disabled 'disabled'}} {{if this.dragging 'dragging'}} {{if this.hovering 'hovering'}}"
      ...attributes>
   {{yield (hash dragging=this.dragging hovering=this.hovering)}}
