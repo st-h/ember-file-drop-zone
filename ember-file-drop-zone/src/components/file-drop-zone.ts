@@ -15,7 +15,7 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   @tracked hovering = false;
   @tracked dragging = false;
-  @tracked windowEnteredCounter = 0;
+  windowEnteredCounter = 0;
 
   constructor(owner: unknown, args: FileDropZoneComponentArgs) {
     super(owner, args);
