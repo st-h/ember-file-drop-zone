@@ -19,18 +19,22 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   constructor(owner: unknown, args: FileDropZoneComponentArgs) {
     super(owner, args);
-    window.addEventListener('dragenter', this.onWindowDragEnter);
-    window.addEventListener('dragleave', this.onWindowDragLeave);
-    window.addEventListener('dragover', this.onWindowDragOver);
-    window.addEventListener('drop', this.onWindowDrop);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('dragenter', this.onWindowDragEnter);
+      window.addEventListener('dragleave', this.onWindowDragLeave);
+      window.addEventListener('dragover', this.onWindowDragOver);
+      window.addEventListener('drop', this.onWindowDrop);
+    }
   }
 
   willDestroy() {
     super.willDestroy();
-    window.removeEventListener('dragenter', this.onWindowDragEnter);
-    window.removeEventListener('dragleave', this.onWindowDragLeave);
-    window.removeEventListener('dragover', this.onWindowDragOver);
-    window.removeEventListener('drop', this.onWindowDrop);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('dragenter', this.onWindowDragEnter);
+      window.removeEventListener('dragleave', this.onWindowDragLeave);
+      window.removeEventListener('dragover', this.onWindowDragOver);
+      window.removeEventListener('drop', this.onWindowDrop);
+    }
   }
 
   hasFiles(e: DragEvent): boolean {
