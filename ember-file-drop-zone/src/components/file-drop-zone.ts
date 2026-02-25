@@ -19,7 +19,10 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   constructor(owner: unknown, args: FileDropZoneComponentArgs) {
     super(owner, args);
-    if (typeof window !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.addEventListener === 'function'
+    ) {
       window.addEventListener('dragenter', this.onWindowDragEnter);
       window.addEventListener('dragleave', this.onWindowDragLeave);
       window.addEventListener('dragover', this.onWindowDragOver);
@@ -29,7 +32,10 @@ export default class FileDropZoneComponent extends Component<FileDropZoneCompone
 
   willDestroy() {
     super.willDestroy();
-    if (typeof window !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.removeEventListener === 'function'
+    ) {
       window.removeEventListener('dragenter', this.onWindowDragEnter);
       window.removeEventListener('dragleave', this.onWindowDragLeave);
       window.removeEventListener('dragover', this.onWindowDragOver);
