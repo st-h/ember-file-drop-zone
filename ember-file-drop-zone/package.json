@@ -1,6 +1,6 @@
 {
   "name": "ember-file-drop-zone",
-  "version": "3.0.0-rc.3",
+  "version": "3.0.0-rc.4",
   "description": "easily add a dropzone to enable file drag and drop to your ember app",
   "keywords": [
     "ember-addon",
@@ -30,10 +30,6 @@
     "rollup": "^4.58.0",
     "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.9.3"
-  },
-  "peerDependencies": {
-    "@glimmer/component": "^1.0.4 || ^2.0.0",
-    "@glimmer/tracking": "^1.0.4 || ^2.0.0"
   },
   "engines": {
     "node": ">= 18"
